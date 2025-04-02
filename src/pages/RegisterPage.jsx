@@ -1,21 +1,35 @@
 import { useState } from "react";
+
 import { register } from "../services/authService";
-import { Form } from "react-router-dom";
+import { useNavigate, useNavigationType } from "react-router-dom";
+import Swal from "sweetalert2";
 import './RegisterPageStyle.css'
 
 export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const data = await register({ name, email, password });
             console.log("Registro exitoso:", data);
+            Swal.fire({
+                icon: 'success',
+                title: `Registrado correctamente, Hola ${name}`,
+                text: 'Todo correcto'
+            }).then(() => {
+                navigate('/login');
+            })
         } catch (err) {
             console.error("Error al registrar:", err.response?.data || err.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al registrarse',
+                text: err.response?.data?.message || 'Algo salio mal'
+            });
         }
     };
 
