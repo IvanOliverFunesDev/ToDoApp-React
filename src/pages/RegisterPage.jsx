@@ -1,7 +1,6 @@
 import { useState } from "react";
-
 import { register } from "../services/authService";
-import { useNavigate, useNavigationType } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import './RegisterPageStyle.css'
 
