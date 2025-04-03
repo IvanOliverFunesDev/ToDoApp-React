@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTasks } from "../services/taskService";
+import { deleteTask, getTasks } from "../services/taskService";
 import TaskCard from "../components/TaskCard";
 
 export default function TaskPage() {
@@ -18,6 +18,17 @@ export default function TaskPage() {
         };
         fetchTareas();
     }, [])
+    const handleDelete = async (id) => {
+        try {
+            await deleteTask(id);
+            console.log("tarea eliminada", id);
+            setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
+
+        } catch (err) {
+            console.error("❌ Error al eliminar tarea:", err.response?.data || err.message);
+
+        }
+    }
     return (
         <div>
             <h2>Mis Tareas</h2>
@@ -25,7 +36,7 @@ export default function TaskPage() {
                 <p>No hay tareas aún.</p>
             ) : (
                 tasks.map((task) => (
-                    <TaskCard key={task.id} task={task} />
+                    <TaskCard key={task.id} task={task} onDelete={handleDelete} />
                 ))
             )}
         </div>
