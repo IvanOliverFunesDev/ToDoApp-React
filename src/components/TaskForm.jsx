@@ -2,6 +2,7 @@ import React from "react";
 import { createTask, updateTask } from "../services/taskService";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import './TaskForm.css'
 
 export default function TaskForm({ tarea }) {
@@ -15,13 +16,30 @@ export default function TaskForm({ tarea }) {
             let data;
             if (tarea) {
                 data = await updateTask(tarea.id, { name, content });
-                console.log("tarea actualizada", data);
+                Swal.fire({
+                    icon: 'success',
+                    title: `Task Actualizada Correctamente`,
+                    text: 'Todo correcto'
+                }).then(() => {
+                    navigate('/tasks');
+                })
             } else {
                 data = await createTask({ name, content });
-                console.log("tarea creada", data);
+                Swal.fire({
+                    icon: 'success',
+                    title: `Task Creada Correctamente`,
+                    text: 'Todo correcto'
+                }).then(() => {
+                    navigate('/tasks');
+                })
             }
         } catch (err) {
             console.error("error", err.response?.data || err.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al iniciar sesion',
+                text: err.response?.data?.message || 'Algo salio mal'
+            });
         }
     }
 

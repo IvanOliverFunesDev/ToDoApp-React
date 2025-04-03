@@ -9,8 +9,6 @@ export default function TaskPage() {
         const fetchTareas = async () => {
             try {
                 const data = await getTasks();
-                console.log("DATA BACKEND:", data);
-
                 setTasks(data.tasks);
             } catch (error) {
                 console.error("❌ Error al obtener tareas:", error);
@@ -21,7 +19,6 @@ export default function TaskPage() {
     const handleDelete = async (id) => {
         try {
             await deleteTask(id);
-            console.log("tarea eliminada", id);
             setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
 
         } catch (err) {

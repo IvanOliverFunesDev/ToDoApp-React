@@ -5,8 +5,6 @@ import TaskForm from '../components/TaskForm';
 
 export default function EditTaskPage() {
     const { id } = useParams();
-    console.log("🪪 ID de la URL:", id);
-
     const [tarea, setTarea] = useState(null);
 
     useEffect(() => {
@@ -23,7 +21,7 @@ export default function EditTaskPage() {
 
     return (
         <div>
-            <h2>`Tarea: {tarea.name}`</h2>
+            <h2>Tarea</h2>
             {tarea ? (
                 <TaskForm tarea={tarea} />
             ) : (

@@ -14,7 +14,6 @@ export default function RegisterPage() {
 
         try {
             const data = await register({ name, email, password });
-            console.log("Registro exitoso:", data);
             Swal.fire({
                 icon: 'success',
                 title: `Registrado correctamente, Hola ${name}`,
