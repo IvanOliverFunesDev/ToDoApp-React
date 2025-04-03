@@ -19,7 +19,7 @@ export default function LoginPage() {
                 title: `Login correctamente`,
                 text: 'Todo correcto'
             }).then(() => {
-                // navigate('/login');
+                navigate('/tasks');
             })
         } catch (err) {
             console.error("Error encontrado", err.response?.data || err.message);
