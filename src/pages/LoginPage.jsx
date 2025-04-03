@@ -13,7 +13,6 @@ export default function LoginPage() {
         try {
             const data = await login({ email, password });
             localStorage.setItem('token', data.token);
-            console.log("Login correcto", data);
             Swal.fire({
                 icon: 'success',
                 title: `Login correctamente`,
